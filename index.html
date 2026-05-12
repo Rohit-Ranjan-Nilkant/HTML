@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimalist Galaxy Watch 7 Faces</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Space+Mono:wght@400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      gap: 48px;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 13px;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .faces-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .watch-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .watch-label {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    /* ── Galaxy Watch 7 bezel ── */
+    .watch-bezel {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      box-shadow:
+        0 0 0 6px #222,
+        0 0 0 8px #333,
+        0 0 0 10px #1a1a1a,
+        0 30px 60px rgba(0,0,0,0.8),
+        0 0 40px rgba(0,0,0,0.5);
+      padding: 12px;
+      position: relative;
+    }
+
+    .watch-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ════════════════════════════
+       FACE 1 — ARC
+    ════════════════════════════ */
+    #face-arc .watch-screen { background: #000; }
+
+    #face-arc .arc-ring {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1px solid #1e1e1e;
+    }
+
+    #face-arc .time-arc {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+    }
+
+    #face-arc .time-arc svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    #face-arc .center-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    #face-arc .hours {
+      font-size: 52px;
+      font-weight: 100;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: #fff;
+    }
+
+    #face-arc .minutes {
+      font-size: 52px;
+      font-weight: 100;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: #555;
+    }
+
+    #face-arc .separator {
+      position: absolute;
+      font-size: 52px;
+      font-weight: 100;
+      color: #333;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -58%);
+    }
+
+    #face-arc .time-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    #face-arc .colon {
+      font-size: 36px;
+      font-weight: 100;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    #face-arc .date-row {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: #444;
+      text-transform: uppercase;
+    }
+
+    #face-arc .tick-marks {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    /* ════════════════════════════
+       FACE 2 — ANALOG PURE
+    ════════════════════════════ */
+    #face-analog .watch-screen { background: #000; }
+
+    #face-analog canvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    /* ════════════════════════════
+       FACE 3 — DIGITAL ZEN
+    ════════════════════════════ */
+    #face-zen .watch-screen {
+      background: radial-gradient(circle at 50% 40%, #0d0d14 0%, #000 70%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    #face-zen .zen-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 46px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #e8e8e8;
+      line-height: 1;
+    }
+
+    #face-zen .zen-seconds {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: #2a6aff;
+      margin-top: 6px;
+    }
+
+    #face-zen .zen-divider {
+      width: 40px;
+      height: 1px;
+      background: #1e2a4a;
+      margin: 14px 0 10px;
+    }
+
+    #face-zen .zen-date {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    #face-zen .zen-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #2a6aff;
+      margin-top: 18px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
+
+    /* ════════════════════════════
+       FACE 4 — ORBIT
+    ════════════════════════════ */
+    #face-orbit .watch-screen {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #face-orbit canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── theme switcher ── */
+    .theme-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .theme-btn {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover, .theme-btn.active { border-color: #888; transform: scale(1.3); }
+
+    .footer {
+      font-size: 10px;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      color: #2a2a2a;
+      text-transform: uppercase;
+      padding-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Galaxy Watch 7 · Minimalist Faces</h1>
+
+  <div class="faces-row">
+
+    <!-- FACE 1: ARC -->
+    <div class="watch-wrapper">
+      <div class="watch-bezel" id="face-arc">
+        <div class="watch-screen">
+          <div class="arc-ring"></div>
+          <svg class="time-arc" viewBox="0 0 232 232" style="position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);transform:rotate(-90deg)">
+            <circle cx="116" cy="116" r="108" fill="none" stroke="#111" stroke-width="1.5"/>
+            <circle id="arc-progress" cx="116" cy="116" r="108" fill="none"
+              stroke="#ffffff" stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-dasharray="678.6"
+              stroke-dashoffset="678.6"/>
+          </svg>
+          <div class="center-content">
+            <div class="time-row">
+              <span class="hours" id="arc-h">--</span>
+              <span class="colon">:</span>
+              <span class="minutes" id="arc-m">--</span>
+            </div>
+            <div class="date-row" id="arc-date">--- --</div>
+          </div>
+        </div>
+      </div>
+      <div class="watch-label">Arc</div>
+      <div class="theme-bar" id="arc-themes">
+        <div class="theme-btn active" data-color="#ffffff" style="background:#ffffff"></div>
+        <div class="theme-btn" data-color="#2a6aff" style="background:#2a6aff"></div>
+        <div class="theme-btn" data-color="#00e5b3" style="background:#00e5b3"></div>
+        <div class="theme-btn" data-color="#ff4d6d" style="background:#ff4d6d"></div>
+      </div>
+    </div>
+
+    <!-- FACE 2: ANALOG -->
+    <div class="watch-wrapper">
+      <div class="watch-bezel" id="face-analog">
+        <div class="watch-screen">
+          <canvas id="analog-canvas" width="256" height="256"></canvas>
+        </div>
+      </div>
+      <div class="watch-label">Analog Pure</div>
+      <div class="theme-bar" id="analog-themes">
+        <div class="theme-btn active" data-color="#ffffff" style="background:#ffffff"></div>
+        <div class="theme-btn" data-color="#2a6aff" style="background:#2a6aff"></div>
+        <div class="theme-btn" data-color="#00e5b3" style="background:#00e5b3"></div>
+        <div class="theme-btn" data-color="#ff4d6d" style="background:#ff4d6d"></div>
+      </div>
+    </div>
+
+    <!-- FACE 3: ZEN -->
+    <div class="watch-wrapper">
+      <div class="watch-bezel" id="face-zen">
+        <div class="watch-screen">
+          <div class="zen-time" id="zen-time">--:--</div>
+          <div class="zen-seconds" id="zen-sec">--</div>
+          <div class="zen-divider"></div>
+          <div class="zen-date" id="zen-date">--- --</div>
+          <div class="zen-dot"></div>
+        </div>
+      </div>
+      <div class="watch-label">Zen</div>
+    </div>
+
+    <!-- FACE 4: ORBIT -->
+    <div class="watch-wrapper">
+      <div class="watch-bezel" id="face-orbit">
+        <div class="watch-screen">
+          <canvas id="orbit-canvas" width="256" height="256"></canvas>
+        </div>
+      </div>
+      <div class="watch-label">Orbit</div>
+      <div class="theme-bar" id="orbit-themes">
+        <div class="theme-btn active" data-color="#2a6aff" style="background:#2a6aff"></div>
+        <div class="theme-btn" data-color="#ffffff" style="background:#ffffff"></div>
+        <div class="theme-btn" data-color="#00e5b3" style="background:#00e5b3"></div>
+        <div class="theme-btn" data-color="#ff4d6d" style="background:#ff4d6d"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Galaxy Watch 7 · 1.3" AMOLED · 432×432</div>
+
+<script>
+  const DAYS   = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+  function pad(n) { return String(n).padStart(2,'0'); }
+
+  // ── Arc state ──
+  let arcColor = '#ffffff';
+
+  // ── Analog state ──
+  let analogColor = '#ffffff';
+  const analogCanvas = document.getElementById('analog-canvas');
+  const actx = analogCanvas.getContext('2d');
+
+  // ── Orbit state ──
+  let orbitColor = '#2a6aff';
+  const orbitCanvas = document.getElementById('orbit-canvas');
+  const octx = orbitCanvas.getContext('2d');
+
+  // ════════════ DRAW ANALOG ════════════
+  function drawAnalog(h, m, s) {
+    const W = 256, C = W / 2, R = W / 2;
+    actx.clearRect(0, 0, W, W);
+
+    // clip to circle
+    actx.save();
+    actx.beginPath();
+    actx.arc(C, C, R, 0, Math.PI * 2);
+    actx.clip();
+    actx.fillStyle = '#000';
+    actx.fillRect(0, 0, W, W);
+
+    // hour markers
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      const isMajor = i % 3 === 0;
+      const r1 = isMajor ? 108 : 111;
+      const r2 = isMajor ? 102 : 107;
+      actx.beginPath();
+      actx.moveTo(C + Math.cos(angle) * r1, C + Math.sin(angle) * r1);
+      actx.lineTo(C + Math.cos(angle) * r2, C + Math.sin(angle) * r2);
+      actx.strokeStyle = isMajor ? '#333' : '#1e1e1e';
+      actx.lineWidth = isMajor ? 1.5 : 1;
+      actx.stroke();
+    }
+
+    // second ring arc
+    const sAngle = -Math.PI / 2;
+    const sProgress = (s / 60) * Math.PI * 2;
+    actx.beginPath();
+    actx.arc(C, C, 112, sAngle, sAngle + sProgress);
+    actx.strokeStyle = analogColor;
+    actx.lineWidth = 1;
+    actx.globalAlpha = 0.25;
+    actx.stroke();
+    actx.globalAlpha = 1;
+
+    // hour hand
+    const hAngle = ((h % 12) / 12 + m / (12 * 60)) * Math.PI * 2 - Math.PI / 2;
+    drawHand(actx, C, C, hAngle, 56, 2.5, analogColor, 0.9);
+
+    // minute hand
+    const minAngle = (m / 60 + s / 3600) * Math.PI * 2 - Math.PI / 2;
+    drawHand(actx, C, C, minAngle, 76, 1.5, analogColor, 0.7);
+
+    // second hand
+    const secAngle = (s / 60) * Math.PI * 2 - Math.PI / 2;
+    drawHand(actx, C, C, secAngle, 86, 1, analogColor, 0.5);
+
+    // center dot
+    actx.beginPath();
+    actx.arc(C, C, 3, 0, Math.PI * 2);
+    actx.fillStyle = analogColor;
+    actx.globalAlpha = 0.8;
+    actx.fill();
+    actx.globalAlpha = 1;
+
+    actx.restore();
+  }
+
+  function drawHand(ctx, cx, cy, angle, len, width, color, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(angle) * len, cy + Math.sin(angle) * len);
+    // subtle tail
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx - Math.cos(angle) * (len * 0.2), cy - Math.sin(angle) * (len * 0.2));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // ════════════ DRAW ORBIT ════════════
+  function drawOrbit(h, m, s, ms) {
+    const W = 256, C = W / 2;
+    octx.clearRect(0, 0, W, W);
+
+    octx.save();
+    octx.beginPath();
+    octx.arc(C, C, W / 2, 0, Math.PI * 2);
+    octx.clip();
+    octx.fillStyle = '#000';
+    octx.fillRect(0, 0, W, W);
+
+    // orbit tracks
+    const tracks = [{ r: 95, alpha: 0.06 }, { r: 74, alpha: 0.08 }, { r: 52, alpha: 0.1 }];
+    tracks.forEach(t => {
+      octx.beginPath();
+      octx.arc(C, C, t.r, 0, Math.PI * 2);
+      octx.strokeStyle = `rgba(255,255,255,${t.alpha})`;
+      octx.lineWidth = 1;
+      octx.stroke();
+    });
+
+    // smooth angles using ms
+    const totalMs = (h * 3600 + m * 60 + s) * 1000 + ms;
+
+    // hour orbit (outer)
+    const hRad = 95;
+    const hAngle = (((h % 12) * 3600000 + m * 60000 + s * 1000 + ms) / (12 * 3600000)) * Math.PI * 2 - Math.PI / 2;
+    drawOrbitDot(octx, C, C, hAngle, hRad, 5, orbitColor, 1);
+
+    // minute orbit (middle)
+    const mRad = 74;
+    const mAngle = ((m * 60000 + s * 1000 + ms) / 3600000) * Math.PI * 2 - Math.PI / 2;
+    drawOrbitDot(octx, C, C, mAngle, mRad, 3.5, orbitColor, 0.8);
+
+    // second orbit (inner)
+    const sRad = 52;
+    const sAngle = ((s * 1000 + ms) / 60000) * Math.PI * 2 - Math.PI / 2;
+    drawOrbitDot(octx, C, C, sAngle, sRad, 2, orbitColor, 0.6);
+
+    // center time
+    octx.fillStyle = '#fff';
+    octx.font = '300 28px Inter, sans-serif';
+    octx.textAlign = 'center';
+    octx.textBaseline = 'middle';
+    octx.globalAlpha = 0.9;
+    octx.fillText(`${pad(h)}:${pad(m)}`, C, C);
+    octx.globalAlpha = 1;
+
+    octx.restore();
+  }
+
+  function drawOrbitDot(ctx, cx, cy, angle, r, size, color, alpha) {
+    const x = cx + Math.cos(angle) * r;
+    const y = cy + Math.sin(angle) * r;
+
+    // glow
+    ctx.save();
+    ctx.globalAlpha = alpha * 0.3;
+    const grd = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
+    grd.addColorStop(0, color);
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(x, y, size * 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // dot
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // ════════════ TICK ════════════
+  let lastSec = -1;
+
+  function tick() {
+    const now = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+    const ms = now.getMilliseconds();
+
+    // — Arc face —
+    if (s !== lastSec) {
+      document.getElementById('arc-h').textContent = pad(h);
+      document.getElementById('arc-m').textContent = pad(m);
+      document.getElementById('arc-date').textContent = `${DAYS[now.getDay()]} ${now.getDate()}`;
+
+      // arc = minute progress
+      const pct = (m * 60 + s) / 3600;
+      const circ = 2 * Math.PI * 108;
+      const offset = circ * (1 - pct);
+      const arc = document.getElementById('arc-progress');
+      arc.setAttribute('stroke-dasharray', circ.toFixed(1));
+      arc.setAttribute('stroke-dashoffset', offset.toFixed(1));
+      arc.setAttribute('stroke', arcColor);
+
+      // — Zen face —
+      document.getElementById('zen-time').textContent = `${pad(h)}:${pad(m)}`;
+      document.getElementById('zen-sec').textContent = pad(s);
+      document.getElementById('zen-date').textContent = `${DAYS[now.getDay()]} · ${MONTHS[now.getMonth()]} ${now.getDate()}`;
+
+      lastSec = s;
+    }
+
+    // — Analog (every frame for smooth hands) —
+    drawAnalog(h, m, s + ms / 1000);
+
+    // — Orbit (every frame) —
+    drawOrbit(h, m, s, ms);
+
+    requestAnimationFrame(tick);
+  }
+
+  // ════════════ THEME BUTTONS ════════════
+  function bindThemes(barId, onPick) {
+    document.getElementById(barId).querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById(barId).querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        onPick(btn.dataset.color);
+      });
+    });
+  }
+
+  bindThemes('arc-themes', c => { arcColor = c; });
+  bindThemes('analog-themes', c => { analogColor = c; });
+  bindThemes('orbit-themes', c => { orbitColor = c; });
+
+  // start
+  tick();
+</script>
+</body>
+</html>
